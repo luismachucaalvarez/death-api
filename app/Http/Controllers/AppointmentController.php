@@ -99,10 +99,10 @@ class AppointmentController extends Controller
 
     public function getAllAppointments(): \Illuminate\Http\JsonResponse
     {
-        $appointments = Appointment::all();
+        $appointments = Appointment::all()->toArray();
 
         return response()->json([
-            $appointments
+            'data' => $appointments
         ]);
     }
 }
