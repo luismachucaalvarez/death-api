@@ -97,12 +97,12 @@ class AppointmentController extends Controller
 
     }
 
-    public function getAllAppointments(): \Illuminate\Http\JsonResponse
+    /*public function getAllAppointments(): \Illuminate\Http\JsonResponse
     {
         $appointments = Appointment::all()->toArray();
 
         return response()->json([
             'data' => $appointments
         ]);
-    }
+    }*/
 }

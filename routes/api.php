@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,9 @@ Route::post('login', [
 
 Route::group(
     ['prefix' => 'appointments' ], function (){
-        Route::get('', [AppointmentController::class, 'getAllAppointments']);
+        Route::get('', function (){
+            return Appointment::all();
+        });
         Route::post('new/anonymous', [AppointmentController::class, 'anonymousAppointment']);
         Route::post('new/registered', [AppointmentController::class, 'registeredAppointment']);
 }
