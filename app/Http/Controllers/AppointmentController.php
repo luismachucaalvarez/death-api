@@ -96,13 +96,13 @@ class AppointmentController extends Controller
     public function checkAppointmentDuration(){
 
     }
-    
+
     public function getAllAppointments(): \Illuminate\Http\JsonResponse
     {
         $appointments = Appointment::all();
 
         return response()->json([
-            'data'=>$appointments
+            $appointments
         ]);
     }
 }
