@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AppointmentCollection;
+use App\Http\Resources\AppointmentResource;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
@@ -97,12 +100,17 @@ class AppointmentController extends Controller
 
     }
 
-    /*public function getAllAppointments(): \Illuminate\Http\JsonResponse
+    public function getAllAppointments(): \Illuminate\Http\JsonResponse
     {
-        $appointments = Appointment::all()->toArray();
+        //$appointments = Appointment::all()->toArray();
+
+        //$appointments = Appointment::select('appointments.id', 'appointments.date', 'appointments.start_time')->groupBy('appointments.date')->get();
+        $appointments = AppointmentResource::collection(Appointment::all());
 
         return response()->json([
             'data' => $appointments
         ]);
-    }*/
+    }
+
+
 }

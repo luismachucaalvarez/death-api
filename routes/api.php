@@ -31,9 +31,13 @@ Route::post('login', [
 
 Route::group(
     ['prefix' => 'appointments' ], function (){
-        Route::get('', function (){
-            return Appointment::all();
-        });
+        /*Route::get('', function (){
+            return Appointment::groupBy('date')->get();
+        });*/
+        Route::get('', [AppointmentController::class, 'getAllAppointments']);
+        Route::get('days', [function () {
+            return Appointment::select('date')->distinct()->get();
+                }]);
         Route::post('new/anonymous', [AppointmentController::class, 'anonymousAppointment']);
         Route::post('new/registered', [AppointmentController::class, 'registeredAppointment']);
 }
