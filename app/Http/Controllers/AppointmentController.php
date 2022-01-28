@@ -105,7 +105,7 @@ class AppointmentController extends Controller
         $appointmentsPerDay = AppointmentResource::collection(Appointment::all())->collection->groupBy('date');
 
         return response()->json([
-            $appointmentsPerDay
+            'test' => $appointmentsPerDay
         ]);
     }
 
