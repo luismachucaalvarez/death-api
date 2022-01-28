@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\AppointmentResource;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,11 +37,12 @@ Route::group(
             return Appointment::groupBy('date')->get();
         });*/
         Route::get('', [AppointmentController::class, 'getAllAppointments']);
-        Route::get('', [AppointmentController::class, 'getAllAppointments']);
-        Route::get('days', [function () {
-            return Appointment::select('date')->distinct()->get();
-                }]);
+        //Route::get('', [AppointmentController::class, 'getAllAppointments']);
+        /*Route::get('days', [function () {
+            return new AppointmentResource(Appointment::all());
+                }]);*/
     //Route::get('days/{date}', [AppointmentController::class, 'getHoursPerDay']);
+    Route::get('days', [AppointmentController::class, 'getAllAppointmentsPerDay']);
     Route::get('days/{date}', [function ($date) {
         return Appointment::where('date', '=', Carbon::parse($date))->select('start_time')->get();;
     }]);

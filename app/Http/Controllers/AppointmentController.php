@@ -100,6 +100,15 @@ class AppointmentController extends Controller
 
     }
 
+    public function getAllAppointmentsPerDay(): \Illuminate\Http\JsonResponse
+    {
+        $appointmentsPerDay = AppointmentResource::collection(Appointment::all())->collection->groupBy('date');
+
+        return response()->json([
+            $appointmentsPerDay
+        ]);
+    }
+
     public function getAllAppointments(): \Illuminate\Http\JsonResponse
     {
         //$appointments = Appointment::all()->toArray();
