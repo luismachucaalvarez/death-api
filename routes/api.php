@@ -42,7 +42,7 @@ Route::group(
                 }]);
     //Route::get('days/{date}', [AppointmentController::class, 'getHoursPerDay']);
     Route::get('days/{date}', [function ($date) {
-        return Appointment::where('date', '=', Carbon::parse($date))->get();;
+        return Appointment::where('date', '=', Carbon::parse($date))->select('start_time')->get();;
     }]);
     Route::post('new/anonymous', [AppointmentController::class, 'anonymousAppointment']);
         Route::post('new/registered', [AppointmentController::class, 'registeredAppointment']);
