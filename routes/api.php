@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Appointment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,10 +36,15 @@ Route::group(
             return Appointment::groupBy('date')->get();
         });*/
         Route::get('', [AppointmentController::class, 'getAllAppointments']);
+        Route::get('', [AppointmentController::class, 'getAllAppointments']);
         Route::get('days', [function () {
             return Appointment::select('date')->distinct()->get();
                 }]);
-        Route::post('new/anonymous', [AppointmentController::class, 'anonymousAppointment']);
+    //Route::get('days/{date}', [AppointmentController::class, 'getHoursPerDay']);
+    Route::get('days/{date}', [function ($date) {
+        return Appointment::where('date', '=', Carbon::parse($date))->get();;
+    }]);
+    Route::post('new/anonymous', [AppointmentController::class, 'anonymousAppointment']);
         Route::post('new/registered', [AppointmentController::class, 'registeredAppointment']);
 }
 );

@@ -112,5 +112,19 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function getHoursPerDay($date): \Illuminate\Http\JsonResponse
+    {
+
+
+
+        $date = Carbon::parse($date);
+        $hoursPerDay = Appointment::where('date', '=', Carbon::parse($date))->get();
+
+        return response()->json([
+            'data' => $hoursPerDay
+        ]);
+
+    }
+
 
 }
